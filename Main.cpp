@@ -11,6 +11,8 @@ class Main{
 		void Options(int);
 		void AccountType(PersonDetails);
 		bool ChangePin(PersonDetails);
+		bool BalanceDeposit(int);
+		bool BalanceDeduct(int);
 };
 Main::Main(){
 	cout<<"constructor called"<<endl;
@@ -51,6 +53,7 @@ void Main::Options(int c){
 		case 1:
 			cout<<endl<<"Your Balance is:";
 		case 2:
+			int balWid;
 			cout<<endl<<"Enter Amount to withdraw:";
 			cin>>balWid;
 			if(BalanceDeduct(balWid)){
@@ -61,6 +64,7 @@ void Main::Options(int c){
 				cout<<"Given Amount cannot be deducted.";
 			}
 		case 3:
+			int balDep;
 			cout<<endl<<"Enter Amount to deposit:";
 			cin>>balDep;
 			if(BalanceDeposit(balDep)){
@@ -76,6 +80,12 @@ void Main::Options(int c){
 				system.exit(0);
 			}
 	}
+}
+bool Main::BalanceDeduct(int bal){
+
+}
+bool Main::BalanceDeposit(int bal){
+	
 }
 int main(int argc, char** argv) {
 	system("pause");
