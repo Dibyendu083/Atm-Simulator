@@ -1,7 +1,7 @@
 # Atm-Simulator
 # Features
 + Add an account
-+ Withdraw using a/c or number
++ Withdraw using a/c or card number
 + Deposit using a/c number
 # Task
 + ?
