@@ -41,9 +41,56 @@ Main::Main(){
 			cout<<endl<<"Your New Account with us opened successfully"<<endl<<"Thank You"<<endl;
 	}
 }
+
+
+//*****************************//
+//  @Dibyendu //
+
+// Data Validation return true if match found else return false 
+// Data is Stored in file name cardNumber.txt with 16 digit of card number and 14 digit pin number
+
 bool Main::validate(String cardNo,String PIN){
 	
+     string fcnum,fpin;
+    ifstream fin;					// File object for reading data
+    fin.open("cardNumer.txt",ios::in);			// opening cardNumber.txt File
+    fin.seekg(0);
+    
+    
+    int found = 0;					// to check if matched found
+    
+
+	// file Reading
+	
+    while(fin>>fcnum )
+    {
+        
+        
+        if((fcnum.compare(cardno)==0))
+        {
+            fin>>fpin;
+            if((fpin.compare(pin))==0)
+             found=1;
+        }
+       
+    }
+    
+    
+
+    fin.close();
+        
+            
+    if(found==1)
+    return true;
+    else
+    {
+        return false;
+    }
+    
+	
 }
+
+//***************************************************************//
 bool Main::ChangePin(PersonDetails p){
 	
 	
