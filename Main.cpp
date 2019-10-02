@@ -54,7 +54,7 @@ bool Main::validate(String cardNo,String PIN){
 	
      string fcnum,fpin;
     ifstream fin;					// File object for reading data
-    fin.open("cardNumer.txt",ios::in);			// opening cardNumber.txt File
+    fin.open("cardNumber.txt",ios::in);			// opening cardNumber.txt File
     fin.seekg(0);
     
     
