@@ -1,13 +1,19 @@
 #include <iostream>
 #include<string>
+#include<fstream>
+#include "PersonDetails.h"
+//#include "String.h"
+
 using namespace std;
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+#include<iostream>
+using namespace std;
+
 class Main{
-	string CardNumber;
-	string pin;
+	String CardNumber;
+	String pin;
 	public :
 		Main();
-		bool validate(string,string);
+		bool validate(String,String);
 		void Options(int);
 		void AccountType(PersonDetails);
 		bool ChangePin(PersonDetails);
@@ -36,16 +42,74 @@ Main::Main(){
 				cout<<endl<<"Entered Card Number or PIN is incorrect";
 			}
 		case 2:
-			PersonDetails p();
-			AccountType(PersonDetails p);
+			PersonDetails p;
 			cout<<endl<<"Your New Account with us opened successfully"<<endl<<"Thank You"<<endl;
 	}
 }
+
+
+//*****************************//
+//  @Dibyendu //
+
+// Data Validation return true if match found else return false 
+// Data is Stored in file name cardNumber.txt with 16 digit of card number and 14 digit pin number
+
 bool Main::validate(String cardNo,String PIN){
 	
-}
-bool Main::ChangePin(PersonDetails p){
+     string fcnum,fpin;
+    ifstream fin;					// File object for reading data
+    fin.open("cardNumber.txt",ios::in);			// opening cardNumber.txt File
+    fin.seekg(0);
+    
+    
+    int found = 0;					// to check if matched found
+    
+
+	// file Reading
 	
+    while(fin>>fcnum )
+    {
+        
+        
+        if((fcnum.compare(cardNo)==0))
+        {
+            fin>>fpin;
+            if((fpin.compare(PIN))==0)
+             found=1;
+        }
+       
+    }
+    fin.close();
+            
+    if(found==1)
+    return true;
+    else
+    {
+        return false;
+    }
+	
+}
+
+//***************************************************************//
+bool Main::ChangePin(PersonDetails p){
+	String PinOld;
+	String PinNew;
+	cout<<endl<<"Enter Current pin:";
+	cin>>PinOld;
+	cout<<endl<<"Enter New Pin:";
+	cin>>PinNew;
+	if(PinOld==p.pin){
+		ofstream outFile;
+		ifstream inFile;
+		inFile.open("cardNumber",ios::in);
+		outFile.open("cardNumber.txt",ios::out);
+		while(inFile.seekg(1)!=pin);
+		outFile.write(PinNew);
+		cout<<endl<<"Pin changed successfully.";
+		inFile.close();
+		outFile.close();
+		system.exit(0);	
+	}	
 	
 }
 void Main::Options(int c){
@@ -87,6 +151,7 @@ bool Main::BalanceDeduct(int bal){
 bool Main::BalanceDeposit(int bal){
 	
 }
+
 int main(int argc, char** argv) {
 	system("pause");
 	return 0;
