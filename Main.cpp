@@ -1,6 +1,15 @@
+/*
+String class taking  'abhishek sharma' as 'abhishek', not taking space and after string as input.
+balanceDeduct and balanceDeposit method not defined.
+generateCardNumber ,generatePin is not defined.
+*/
+
 #include <iostream>
+#include<string>
 #include<fstream>
 #include "PersonDetails.h"
+
+
 
 using namespace std;
 #include<iostream>
@@ -8,15 +17,16 @@ using namespace std;
 
 class Main{
 	String CardNumber;
-	String pin;
+	String Pin;
 	public :
 		Main();
 		bool validate(String,String);
 		void Options(int);
 		void AccountType(PersonDetails);
-		bool ChangePin(PersonDetails);
-		bool BalanceDeposit(int);
+		bool ChangePin(String,String);
+	/*	bool BalanceDeposit(int);
 		bool BalanceDeduct(int);
+*/
 };
 Main::Main(){
 	cout<<"constructor called"<<endl;
@@ -28,8 +38,8 @@ Main::Main(){
 			cout<<"Enter Card Number:";
 			cin>>CardNumber;
 			cout<<"Enter pin:";
-			cin>>pin;
-			if(validate(CardNumber,pin)){
+			cin>>Pin;
+			if(validate(CardNumber,Pin)){
 				int choice1;
 				cout<<"Enter 1 for Balance Enquiry\nEnter 2 for Balance Withdrawal\nEnter 3 for Balance Deposit\nEnter 4 to change PIN\n Enter your choice:";
 				cin>>choice1;
@@ -39,8 +49,14 @@ Main::Main(){
 			{
 				cout<<endl<<"Entered Card Number or PIN is incorrect";
 			}
+			break;
 		case 2:
 			PersonDetails p;
+			cout<<p.name.get()<<','<<p.fatherName.get()<<','<<p.motherName.get()<<','<<p.gender.get()<<','<<p.address.get()<<','<<p.contactNo.get()<<','<<p.CardNumber.get()<<','<<p.pin.get()<<','<<p.AccountType.get()<<endl;
+			fstream outFile;
+			outFile.open("Account_details.csv",ios::out);
+			outFile<<p.name.get()<<','<<p.fatherName.get()<<','<<p.motherName.get()<<','<<p.gender.get()<<','<<p.address.get()<<','<<p.contactNo.get()<<','<<p.CardNumber.get()<<','<<p.pin.get()<<','<<p.AccountType.get()<<endl;
+			outFile.close();
 			cout<<endl<<"Your New Account with us opened successfully"<<endl<<"Thank You"<<endl;
 	}
 }
@@ -54,25 +70,24 @@ Main::Main(){
 
 bool Main::validate(String cardNo,String PIN){
 	
-     string fcnum,fpin;
+     String fcnum,fpin;
     ifstream fin;					// File object for reading data
-    fin.open("cardNumber.txt",ios::in);			// opening cardNumber.txt File
+    fin.open("cardNumber.csv",ios::in);			// opening cardNumber.txt File
     fin.seekg(0);
     
     
     int found = 0;					// to check if matched found
-    
-
-	// file Reading
-	
+    // file Reading
+	fin>>fcnum>>",";
     while(fin>>fcnum )
     {
         
+		fin>>fcnum>>",";
         
-        if((fcnum.compare(cardNo)==0))
+        if((fcnum==cardNo))
         {
-            fin>>fpin;
-            if((fpin.compare(PIN))==0)
+            fin>>fpin>>",";
+            if((fpin==Pin));
              found=1;
         }
        
@@ -89,38 +104,42 @@ bool Main::validate(String cardNo,String PIN){
 }
 
 //***************************************************************//
-bool Main::ChangePin(PersonDetails p){
+bool Main::ChangePin(String cardNo,String pin){
 	String PinOld;
 	String PinNew;
 	cout<<endl<<"Enter Current pin:";
 	cin>>PinOld;
 	cout<<endl<<"Enter New Pin:";
 	cin>>PinNew;
-	if(PinOld==p.pin){
+	if(PinOld==pin){
 		ofstream outFile;
 		ifstream inFile;
-		inFile.open("cardNumber",ios::in);
-		outFile.open("cardNumber.txt",ios::out);
-		while(inFile.seekg(1)!=pin);
-		outFile.write(PinNew);
+		inFile.open("cardNumber.csv",ios::in);
+		outFile.open("cardNumber.csv",ios::out);
+		while(!((String)inFile.get()==CardNumber));
+		if((String)inFile.get()==pin){
+			outFile<<PinNew;
+		}
 		cout<<endl<<"Pin changed successfully.";
 		inFile.close();
 		outFile.close();
-		system.exit(0);	
+		return true;
+		//system.exit();	
 	}	
-	
+	return false;
 }
 void Main::Options(int c){
 	switch(c){
 		case 1:
 			cout<<endl<<"Your Balance is:";
-		case 2:
+	/*	case 2:
 			int balWid;
 			cout<<endl<<"Enter Amount to withdraw:";
 			cin>>balWid;
 			if(BalanceDeduct(balWid)){
 				cout<<"Balance successfully deducted.";
-				system.exit(0);
+				return ;
+				//system.exit(0);
 			}
 			else{
 				cout<<"Given Amount cannot be deducted.";
@@ -131,26 +150,31 @@ void Main::Options(int c){
 			cin>>balDep;
 			if(BalanceDeposit(balDep)){
 				cout<<endl<<"Balance successfully deposited";
-				system.exit(0);
+				return;
+				//system.exit(0);
 			}
-		case 4:
-			if(ChangePin(PersonDetails p)){
+	*/	case 4:
+			if(ChangePin(CardNumber,Pin)){
 				cout<<endl<<"Pin changed successfully.";
 			}
 			else{
 				cout<<endl<<"Cannot change pin.";
-				system.exit(0);
+				//system.exit(0);
 			}
 	}
 }
-bool Main::BalanceDeduct(int bal){
+/*bool Main::BalanceDeduct(int bal){
 
 }
 bool Main::BalanceDeposit(int bal){
 	
 }
+*/
+
+
 
 int main(int argc, char** argv) {
+	Main m;
 	system("pause");
 	return 0;
 }
