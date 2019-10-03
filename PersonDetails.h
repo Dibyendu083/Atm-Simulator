@@ -2,21 +2,23 @@
 #include "String.h"
 using namespace std;
 class PersonDetails{
+	public:
 	String name;
 	String fatherName;
 	String motherName;
 	String gender;
 	String address;
 	String contactNo;
-	String cardNumber;
+	String CardNumber;
 	String pin;
 	String AccountType;
-	double balance=0;
-	double overdraftLimit=0;
+	double balance;
+	double overdraftLimit;
 	public :
 		PersonDetails();
-		long int generateCardNumber();
+	/*	long int generateCardNumber();
 		int generatePin();
+	*/
 };
 
 PersonDetails::PersonDetails(){
@@ -41,8 +43,9 @@ PersonDetails::PersonDetails(){
 	if(c==2){
 		cout<<"Your Overdraft Limit is:"<<5*balance;
 	}
-	this->cardNumber=generateCardNumber();
+/*	this->CardNumber=generateCardNumber();
 	this->pin=generatePin();
+*/
 }
 class AccountType{
 	String type;
