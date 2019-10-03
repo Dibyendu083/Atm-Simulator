@@ -1,10 +1,12 @@
 #include<iostream>
 using namespace std;
 class String {
+	
     int size;
     char* data;
 public:
     String(int = 0);
+    char * get();
     String(const char[]);
     String(const String&);
     friend String operator+(const String&, const String&);
@@ -19,7 +21,9 @@ public:
     int length();
     ~String();
 };
-
+char * String::get(){
+	return this->data;
+}
 String :: String(int s) {
     cout<<"Constructor called"<<endl;
     this->size = s + 1;
@@ -70,7 +74,7 @@ String& String :: operator=(const String& str) {
 }
 
 ostream& operator<<(ostream& os, const String& str) {
-    os<<"Operator << overload"<<endl;
+   // os<<"Operator << overload"<<endl;
     for(int i = 0; i < str.size-1; i++)
         os<<str.data[i];
     return os;
@@ -124,4 +128,3 @@ int String :: length() {
 String :: ~String() {
     cout<<"Destructor called"<<endl;
 }
-
