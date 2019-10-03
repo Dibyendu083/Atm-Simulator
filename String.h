@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string.h>
 using namespace std;
 class String {
 	
@@ -49,9 +50,21 @@ String :: String(const String& str) {
         this->data[i] = str.data[i];
     this->data[this->size-1] = '\0';
 }
-
+/*
+*	getline method of string.h takes the char* with whitespaces(ws)
+*	copy each character to ob.data using while loop
+*	the resultant ob.data has every character of s including whitespaces with a '\0' at the end.
+*/
 istream & operator>>(istream &is,const String &ob){
-	is>>ob.data;
+	string s;
+	getline(is>>ws,s);
+	int i = 0;
+	while(s[i] != '\0') {
+		ob.data[i] = s[i];
+		i++;
+	}
+	ob.data[i] = '\0';
+	return is;
 }
 String operator+(const String& s1, const String& s2) {
     cout<<"Operator + overload"<<endl;
