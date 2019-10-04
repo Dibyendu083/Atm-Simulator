@@ -51,11 +51,13 @@ Main::Main(){
 			}
 			break;
 		case 2:
+			case 2:
 			PersonDetails p;
 			cout<<p.name.get()<<','<<p.fatherName.get()<<','<<p.motherName.get()<<','<<p.gender.get()<<','<<p.address.get()<<','<<p.contactNo.get()<<','<<p.CardNumber.get()<<','<<p.pin.get()<<','<<p.AccountType.get()<<endl;
 			fstream outFile;
-			outFile.open("Account_details.csv",ios::out);
-			outFile<<p.name.get()<<','<<p.fatherName.get()<<','<<p.motherName.get()<<','<<p.gender.get()<<','<<p.address.get()<<','<<p.contactNo.get()<<','<<p.CardNumber.get()<<','<<p.pin.get()<<','<<p.AccountType.get()<<endl;
+			outFile.open("Account_details.csv",ios::out| ios::app);
+			outFile.seekp(0,ios_base::end);
+			outFile<<p.name.get()<<','<<p.fatherName.get()<<','<<p.motherName.get()<<','<<p.gender.get()<<','<<p.address.get()<<','<<p.contactNo.get()<<','<<p.CardNumber.get()<<','<<p.pin.get()<<','<<p.AccountType.get()<<"\n";
 			outFile.close();
 			cout<<endl<<"Your New Account with us opened successfully"<<endl<<"Thank You"<<endl;
 	}
